@@ -3,11 +3,12 @@ import Button from "../components/Button"
 import Input from "../components/Input"
 import { Link, useNavigate } from "react-router-dom"
 import { api } from "../api/api"
+import { useUserStore } from "../store/useUserStore"
 
 const SignIn = () => {
     const [error, setError] = useState("")
     const navigate = useNavigate()
-
+    const {setUser} = useUserStore()
     const handleSubmit = async (e) => {
         e.preventDefault()
         setError("")
@@ -19,7 +20,7 @@ const SignIn = () => {
 
         try {
             const data = await api.loginUser(user)
-            console.log(data)
+            setUser(data.data)
             navigate("/")
         } catch (error) {
             console.error(error)

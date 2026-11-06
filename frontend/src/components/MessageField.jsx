@@ -2,6 +2,14 @@ import Button from './Button'
 import TextArea from './TextArea'
 
 const MessageField = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        const data = {
+            content: e.target.content.value
+
+        }
+        console.log(data)
+    }
     return (
         <div className="create-message-section">
             <div className="container">
