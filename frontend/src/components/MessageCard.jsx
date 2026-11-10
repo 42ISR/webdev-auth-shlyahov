@@ -18,7 +18,7 @@ const MessageCard = ({ likes, content, username, createdAt, id, userId, likedBy 
         await api.reportMessage(id)
         getMessages()
     }
-    const isLiked = likedBy.includes(user.user.id)
+    const isLiked = likedBy.includes(user?.user.id)
 
     return (
         <div className="message-card">
@@ -28,14 +28,29 @@ const MessageCard = ({ likes, content, username, createdAt, id, userId, likedBy 
                 <span className="message-time">{createdAt}</span>
             </div>
             <div className="message-actions">
-                <button onClick={handleLike} className="action-button">
-                    <span>{likes} {isLiked ? "💗" : "🤍"}</span>
-                    <span>Нравится</span>
-                </button>
-                <button onClick={handleReport} className="action-button">
-                    <span>🚩</span>
-                    <span>Пожаловаться</span>
-                </button>
+            
+           {user && (
+    <>
+      <button
+        type="button"
+        className="action-button"
+        onClick={handleLike}
+      >
+        <span>{likes} 💗🤍</span>
+        <span>Нравится</span>
+      </button>
+
+      <button
+        type="button"
+        className="action-button"
+        onClick={handleReport}
+      >
+        <span>🚩</span>
+        <span>Пожаловаться</span>
+      </button>
+    </>
+  )}
+            
                 {user?.user.id === userId && (
                 <button onClick={handleDelete} className="action-button delete">
                     <span>❌</span>
